@@ -29,17 +29,7 @@ const create = async (name, email, password, phones) =>
       lastLogin: formatDate.dataAtualFormatada(),
     }));
 
-const updateNewUser = async ({newUser, token}) => {
-  getCollection("users").then((user) => user.updateOne({ $set: { newUser, token } }));
-
-  return {
-    ...newUser,
-    token,
-  };
-};
-
 module.exports = {
   getByEmail,
   create,
-  updateNewUser,
 };
