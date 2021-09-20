@@ -20,10 +20,13 @@
   },
   "homepage": "https://github.com/hleoc/Projeto-SKY#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "class-transformer": "^0.4.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "mongodb": "^4.1.2"
+    "mongodb": "^4.1.2",
+    "tsyringe": "^4.6.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.12"

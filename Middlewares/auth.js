@@ -9,7 +9,7 @@ const SECRET = process.env.APP_SECRET;
 module.exports = async (req, res, next) => {
   try {
     const token = req.headers.authorization;
-    if (!token) return res.status(401).json({ message: "missing auth token" });
+    if (!token) return res.status(401).json({ message: "Não autorizado" });
     const payload = jwt.verify(token, SECRET);
     const user = await User.getByEmail(payload.userData);
 
