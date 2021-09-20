@@ -1,6 +1,17 @@
+const jwt = require("jsonwebtoken");
+
+const APP_SECRET = require("dotenv/config");
+
 const emailMiddleware = require("../Middlewares/emailMiddleware");
 
 const model = require("../Models/User");
+
+const SECRET = process.env.APP_SECRET;
+
+const jwtConfig = {
+  expiresIn: "30m",
+  algorithm: "HS256",
+};
 
 const create = async (name, email, password, phones) => {
   const emailExists = await model.getByEmail({ email });
@@ -29,8 +40,14 @@ const create = async (name, email, password, phones) => {
       statusCode: 400,
     };
   }
+  
+    const payload = {
+      iss: "post_api",
+      aud: "identify",
+    };
+    const token = jwt.sign(payload, SECRET, jwtConfig);
 
-  return model.create(name, email, password, phones);
+  return model.create(name, email, password, phones, token);
 };
 
 module.exports = {

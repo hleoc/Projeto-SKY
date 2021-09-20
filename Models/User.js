@@ -5,7 +5,11 @@ const formatDate = require("../Middlewares/formatDate");
 const getByEmail = async ({ email }) =>
   getCollection("users").then((emai) => emai.findOne({ email }));
 
-const create = async (name, email, password, phones) =>
+const getByPassword = async ({ password }) =>
+  getCollection("users").then((pass) => pass.findOne({ password }));
+
+
+const create = async (name, email, password, phones, token) =>
   getCollection("users")
     .then((user) =>
       user.insertOne({
@@ -13,6 +17,7 @@ const create = async (name, email, password, phones) =>
         email,
         password,
         phones,
+        token,
         creationDate: formatDate.dataAtualFormatada(),
         updateDate: formatDate.dataAtualFormatada(),
         lastLogin: formatDate.dataAtualFormatada(),
@@ -22,8 +27,8 @@ const create = async (name, email, password, phones) =>
       _id: result.insertedId,
       name,
       email,
-      password,
       phones,
+      token,
       creationDate: formatDate.dataAtualFormatada(),
       updateDate: formatDate.dataAtualFormatada(),
       lastLogin: formatDate.dataAtualFormatada(),
@@ -31,5 +36,6 @@ const create = async (name, email, password, phones) =>
 
 module.exports = {
   getByEmail,
+  getByPassword,
   create,
 };
